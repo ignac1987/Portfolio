@@ -3,6 +3,7 @@ import { Styles } from "../utils/Style";
 import { projects } from "../Constants";
 import Tilt from 'react-parallax-tilt';
 import { SiGithub } from "react-icons/si";
+//import Kommentar from "./Kommentar";
 
 function Projects() {
     return (
@@ -14,6 +15,8 @@ function Projects() {
                 </span>
 
                 <hr className='w-[35%]'></hr>
+
+                {/*<Kommentar/>*/}
 
                 <div className={Styles.wortStyle.sectionText}>
                     Hier bekommst du ein Überblick, wie ich mein Wissen vermehrt und meine Fähigkeiten weiterentwickelt habe.

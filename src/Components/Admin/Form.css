@@ -1,0 +1,20 @@
+
+td {
+    border: 2px solid #000;
+}
+
+textarea {
+    border: 1px solid #000;
+}
+
+input {
+    border: 1px solid #000;
+}
+
+button {
+    border: 1px solid #000;
+}
+
+table {
+    margin: 20px;
+}

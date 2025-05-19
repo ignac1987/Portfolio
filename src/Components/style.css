@@ -17,3 +17,7 @@
     width: 500px;
 
 }
+
+td {
+    border: 1px solid #000;    
+};

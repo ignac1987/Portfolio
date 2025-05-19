@@ -2,11 +2,15 @@ import React, { useState } from 'react'
 import Kocsog from '../assests/konyv.png';
 import { AiOutlineMenuUnfold } from 'react-icons/ai';
 import { Link } from 'react-scroll';
+import { Link as ALink } from 'react-router-dom';
+import { Link as BLink } from 'react-router-dom';
 
 
 function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false);
+
+    const token = localStorage.getItem("jwt");
 
     const toggle = () => {
 
@@ -18,7 +22,7 @@ function Navbar() {
 
             <nav className='fixed w-full z-20 top-0 bg-blue-100 bg-opacity-80 '>
                 <div className='max-w-screen-xl flex flex-row mx-auto p-2'>
-                    <img src={Kocsog} className='h-8 ml-4' alt='LOGO'/>                    
+                    <img src={Kocsog} className='h-8 ml-4' alt='LOGO' />
 
                     <div className=' flex md:order-2'>
                         <button onClick={toggle} className='inline-flex items-cener p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:ring-2 focus:ring-gray-200'  >
@@ -57,6 +61,28 @@ function Navbar() {
                                     <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Kontakt</div>
                                 </li>
                             </Link>
+
+                            {token != null
+
+                                ? <ALink to='Kommentar'>
+                                    <li>
+                                        <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Kommentar</div>
+                                    </li>
+                                </ALink>
+
+                                : null
+                            }
+
+                            {token == null
+                            
+                                ? <BLink spy={true} to='Login' activeClass='activeClass'>
+                                    <li>
+                                        <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Login</div>
+                                    </li>
+                                </BLink>
+
+                                : null
+                            }
 
                         </ul>
                     </div>
