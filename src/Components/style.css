@@ -1,5 +1,4 @@
-.parallax-effect-glare-scale
-{
+.parallax-effect-glare-scale{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,9 +14,8 @@
 
 .foto{
     width: 500px;
-
 }
 
-td {
+.td{
     border: 1px solid #000;    
 };
