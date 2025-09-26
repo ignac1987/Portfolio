@@ -16,16 +16,16 @@ function Modify() {
 
     useEffect(enderung, []);
 
-    
+
     function enderung() {
 
         const option = {
 
-            headers : {
+            headers: {
 
-                "X-Parse-Application-Id" : "tQRGq1dDgAmbR8jVTCEkhL3m3nOP39bSNqLSGi0i",
+                "X-Parse-Application-Id" : process.env.REACT_APP_ID,
 
-                "X-Parse-REST-API-Key" : "aftZIP1uMDxJeNF6iqi0j4oMHb5UZxaKCguukcxl",
+                "X-Parse-REST-API-Key" : process.env.REACT_APP_API_KEY,
 
             },
             method: "GET",
@@ -39,31 +39,30 @@ function Modify() {
                 setText(einlesen.results[0].text);
             })
 
-    }    
+    }
 
-    //HF 
-
+    
     function verendern() {
 
         const felirat = {
 
-            key : key,
+            key: key,
 
-            text : text,
+            text: text,
 
-            objektId : id,
+            objektId: id,
 
         }
 
         const option = {
 
-            headers : {
+            headers: {
 
-                "X-Parse-Application-Id" : "tQRGq1dDgAmbR8jVTCEkhL3m3nOP39bSNqLSGi0i",
+                "X-Parse-Application-Id": process.env.REACT_APP_ID,
 
-                "X-Parse-REST-API-Key" : "aftZIP1uMDxJeNF6iqi0j4oMHb5UZxaKCguukcxl",
+                "X-Parse-REST-API-Key": process.env.REACT_APP_API_KEY,
 
-                "Content-Type" : "application/json",
+                "Content-Type": "application/json",
 
             },
             method: "PUT",
@@ -73,40 +72,49 @@ function Modify() {
 
         fetch(`https://parseapi.back4app.com/classes/Content/${id}`, option)
             .then(einlesen => einlesen.json())
-            .then(() => alert("HILFE!!!!"))            
-
-        
+            .then(() => alert("HILFE!!!!"))
 
         console.log(felirat);
 
-    }   
+    }
 
-    
+
     return <div>
 
-        <div>
+        <div className="Ramen">
 
             <h1>{id}</h1>
-            
+
+            <br />
+
             <label>key: </label>
             <input value={key} type="text" onChange={(e) => setKey(e.target.value)}></input>
 
-            <br/>
-            <br/>
+            <br />
+            <br />
 
             <label>Text: </label>
-            <input value={text} type="text" onChange={(e) => setText(e.target.value)}></input>
+            <br />
+            <textarea rows={5} cols={100} className="py-5 px-3" value={text} type="text" onChange={(e) => setText(e.target.value)}></textarea>
 
-            <br/>
-            <br/>  
+            <br />
+            <br />
 
-            <button onClick={(event) => verendern()}>Modositas</button>
+            <div className="Butten">
 
-            <br/>
-            <br/> 
+                <div>
+                <button onClick={(event) => verendern()}>Modositas</button>
+                </div>
 
-            <button onClick={() => navigate("/")}>Zurück</button>                
-            
+                <br />
+                <br />
+
+                <div className="ml-8">
+                <button onClick={() => navigate("/")}>Zurück</button>
+                </div>
+
+            </div>
+
         </div>
 
     </div >

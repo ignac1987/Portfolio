@@ -11,11 +11,58 @@ function Kommentar() {
 
     const [kommentaren, setKommentaren] = useState([]);
 
-    const [einfüggen, setEinfüggen] = useState([]);
-  
+    const [statistik, setStatistik] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(auslesen, []);
+
+    const [megjelenites, setMegjelenites] = useState([]);
+
+
+
+    useEffect(fetchstatistik, [])
+
+    function fetchstatistik() {
+
+        const option = {
+
+            headers: {
+
+                "X-Parse-Application-Id" : process.env.REACT_APP_ID,
+
+                "X-Parse-REST-API-Key" : process.env.REACT_APP_API_KEY,
+            },
+
+            method: "GET",
+        }
+
+        fetch(`https://parseapi.back4app.com/classes/Statistik`, option)
+            .then(lekeres => lekeres.json())
+            .then(daten => setStatistik(daten))
+    }
+
+    function lekeres() {
+
+        const options = {
+
+            headers: {
+
+                "X-Parse-Application-Id": process.env.REACT_APP_ID,
+
+                "X-Parse-REST-API-Key": process.env.REACT_APP_API_KEY,
+
+            },
+
+            method: "GET"
+
+        }
+
+        fetch("https://parseapi.back4app.com/classes/Content", options)
+            .then(valasz => valasz.json())
+            .then(eredmeny => setMegjelenites(eredmeny.results))
+
+    }
 
     //mentes
     function speichern() {
@@ -30,9 +77,9 @@ function Kommentar() {
 
             headers: {
 
-                "X-Parse-Application-Id": "tQRGq1dDgAmbR8jVTCEkhL3m3nOP39bSNqLSGi0i",
+                "X-Parse-Application-Id" : process.env.REACT_APP_ID,
 
-                "X-Parse-REST-API-Key": "aftZIP1uMDxJeNF6iqi0j4oMHb5UZxaKCguukcxl",
+                "X-Parse-REST-API-Key" : process.env.REACT_APP_API_KEY,
 
                 "Content-Type": "application/json",
 
@@ -59,10 +106,9 @@ function Kommentar() {
 
             headers: {
 
-                "X-Parse-Application-Id": "tQRGq1dDgAmbR8jVTCEkhL3m3nOP39bSNqLSGi0i",
+                "X-Parse-Application-Id" : process.env.REACT_APP_ID,
 
-                "X-Parse-REST-API-Key": "aftZIP1uMDxJeNF6iqi0j4oMHb5UZxaKCguukcxl",
-
+                "X-Parse-REST-API-Key" : process.env.REACT_APP_API_KEY,
             },
 
             method: "GET"
@@ -87,9 +133,9 @@ function Kommentar() {
 
             headers: {
 
-                "X-Parse-Application-Id": "tQRGq1dDgAmbR8jVTCEkhL3m3nOP39bSNqLSGi0i",
+                "X-Parse-Application-Id" : process.env.REACT_APP_ID,
 
-                "X-Parse-REST-API-Key": "aftZIP1uMDxJeNF6iqi0j4oMHb5UZxaKCguukcxl"
+                "X-Parse-REST-API-Key" : process.env.REACT_APP_API_KEY,
 
             },
 
@@ -101,51 +147,24 @@ function Kommentar() {
 
     }
 
-    //Modositas
-    function verendern(kontent) {
-
-        const options = {
-
-            headers: {
-
-                "X-Parse-Application-Id" : "tQRGq1dDgAmbR8jVTCEkhL3m3nOP39bSNqLSGi0i",
-
-                "X-Parse-REST-API-Key" : "aftZIP1uMDxJeNF6iqi0j4oMHb5UZxaKCguukcxl",
-
-                "Content-Type" : "application/json",
-
-            },
-
-            method: "PUT"
-
-        }
-
-        fetch(`https://parseapi.back4app.com/classes/Content${kontent.objectId}`, options)
-            .then(antwort => antwort.json())
-            .then(daten => setEinfüggen(daten))
-
-    }
 
     function azonosito(kontent) {
         console.log(kontent.objectId)
         alert(kontent.objectId)
     }
 
-    return <div>
 
-        { localStorage.getItem("jwt") == null ? <h1>Kerlek jelentkezz be!</h1> : <h1>Sikeresen bejelentkeztel!</h1> }
-        
+    return <div className='m-8'>        
 
         <table>
 
-            <thead>
+            <thead className='bg-blue-100' >
                 <tr>
-
-                    <td>key</td>
-                    <td>text</td>
-                    <td>Ansicht-ID</td>
-                    <td>Löschen</td>
-                    <td>Verendern</td>
+                    <th>key</th>
+                    <th>text</th>
+                    <th>Ansicht-ID</th>
+                    <th>Löschen</th>
+                    <th>Verendern</th>
 
                 </tr>
             </thead>
@@ -159,7 +178,7 @@ function Kommentar() {
                         <td>{kontent.text}</td>
                         <td><button onClick={() => azonosito(kontent)}>👀 ID</button></td>
                         <td><button onClick={() => löschen(kontent)}> Löschen </button></td>
-                        <td><button onClick={() => verendern(kontent)}> Verendern </button></td>
+                        <td><button onClick={() => navigate(`/Modify/${kontent.objectId}`)}> Verendern </button></td>
 
                     </tr>
                 )}
@@ -170,22 +189,68 @@ function Kommentar() {
 
         <br />
 
-        <label>Input: </label>
-        <input onChange={(e) => setKey(e.target.value)} value={key}></input>
+        <div>
 
-        <br />
+            <div className='flex flex-row'>
+                <div>
 
-        Text: <br />
-        <textarea onChange={(e) => setText(e.target.value)} value={text}></textarea>
+                <label className='ml-2'>Key: </label>
+                <input className='janosbutton' onChange={(e) => setKey(e.target.value)} value={key}></input>
 
-        <br />
+                </div>
 
-        <button onClick={speichern}>Speichern</button>
-        <br/>
-        <br/>
-        <button onClick={() => navigate("/")}>Zurück</button>
-        <br/>
-        <br/>
+                <br />
+
+                <label className='ml-2' >Text: </label>
+                <textarea className='janosbutton' onChange={(e) => setText(e.target.value)} value={text}></textarea>
+
+                <br />
+                <br />
+
+            </div>
+
+            <div className='Butten'>
+
+                <div className='me-8'>
+                    <button className='janosbutton' onClick={speichern}>Speichern</button>
+                </div>
+
+                <div>
+                    <button className='janosbutton' onClick={() => navigate("/")}>Zurück</button>
+                </div>
+
+            </div>
+
+            <br />
+            <br />
+        </div>
+
+        <div>
+            <table className='border 2px' >
+
+                <thead className='bg-blue-100' >
+                    <tr>
+                        <th>Name</th>
+                        <th>Zahlen</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {statistik.results?.map((statistiken, index) =>
+                        <tr key={index}>
+
+                            <td>{statistiken.Name}</td>
+                            <td>{statistiken.Szam}</td>
+
+                        </tr>
+                    )}
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 

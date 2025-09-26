@@ -14,7 +14,7 @@ function PageRouter() {
                 <Route path="/" element={<App/>} />
                 <Route path="/Kommentar" element={<Kommentar/>}/>
                 <Route path="/Login" element={<Login/>}/>
-                <Route path="/Modify/:id" element={<Modify/>}/>
+                <Route path="/Modify/:id" element={<Modify/>}/>                
             </Routes>
 
         </BrowserRouter>

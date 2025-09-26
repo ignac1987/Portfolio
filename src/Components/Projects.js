@@ -29,15 +29,15 @@ function Projects() {
 
                 {projects.map((project) =>
                 (
-                    <Tilt key={project.name} className='w-[300px] h-[500px] flex flex-col justify-evenly shadow-2xl m-10 item-center hover:shadow-2xl hover:sadow-blue-400 shadow-blue-300 p-3 rounded-xl border-2 border-blue-900'>
+                    <Tilt key={project.name} className='w-[300px] h-[500px] flex flex-col justify-evenly shadow-2xl m-10 item-center hover:shadow-2xl hover:sadow-blue-400 shadow-blue-300 p-8 rounded-xl border-2 border-blue-900'>
 
                         <div className='flex h-full justify-center items-center mb-3 flex-col'>
 
-                            <div className='h-[40px] w-[40px] m-3 bg-slate-50 rounded-full shadow-lg shadow-blue-500 flex justify-center items-center'>
+                            <div className='h-[50px] w-[50px] m-8 bg-slate-50 rounded-full shadow-lg shadow-blue-500 flex justify-center items-center'>
 
                                 <a href={project.source_code_lik} target='blank'>
 
-                                    <SiGithub className="text-3xl font-bold text-blue-600"></SiGithub>
+                                    <SiGithub className="text-4xl font-bold text-blue-600"></SiGithub>
 
                                 </a>
 

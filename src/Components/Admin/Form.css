@@ -1,20 +1,36 @@
 
-td {
+.td {
     border: 2px solid #000;
 }
 
-textarea {
+.textarea {
     border: 1px solid #000;
 }
 
-input {
+.input {
     border: 1px solid #000;
 }
 
-button {
+.janosbutton {
     border: 1px solid #000;
+    margin: 8;
+    padding: 2;
+    border-radius: 12px;
+    background-color: rgb(174, 174, 241);
 }
 
-table {
+.table {
+    border: 1px solid #000;
+    margin: 10px;
+    display: order;
+}
+
+.Ramen {
     margin: 20px;
+    border: 1px solid white;
+}
+
+.Butten {
+    display: flex;
+    flex-direction: row;       
 }

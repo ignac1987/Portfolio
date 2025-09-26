@@ -4,7 +4,7 @@ import { AiOutlineMenuUnfold } from 'react-icons/ai';
 import { Link } from 'react-scroll';
 import { Link as ALink } from 'react-router-dom';
 import { Link as BLink } from 'react-router-dom';
-
+import { Link as CLink } from 'react-router-dom';
 
 function Navbar() {
 
@@ -17,82 +17,105 @@ function Navbar() {
         setIsOpen(!isOpen);
     }
 
-    return (
-        <div>
+    function abmelden() {
 
-            <nav className='fixed w-full z-20 top-0 bg-blue-100 bg-opacity-80 '>
-                <div className='max-w-screen-xl flex flex-row mx-auto p-2'>
-                    <img src={Kocsog} className='h-8 ml-4' alt='LOGO' />
+        localStorage.removeItem("jwt")
+        localStorage.removeItem("user")
+        localStorage.removeItem("id")
 
-                    <div className=' flex md:order-2'>
-                        <button onClick={toggle} className='inline-flex items-cener p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:ring-2 focus:ring-gray-200'  >
-                            <AiOutlineMenuUnfold className='text-blue-400 text-lg'>
+        //oldal aktualizalasa(refresh)
+        window.location.reload();
 
-                            </AiOutlineMenuUnfold>
-                        </button>
+    }
 
-                    </div>
+    return <div>
 
-                    <div className={`items-center ms-6 justify-between w-full md:flex md:w-auto md:order-1 ${isOpen ? 'block' : 'hidden'
-                        } `}>
-                        <ul className={` flex flex-col p-4 md:p-0 mt-4 text-xl border cursor-pointer border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ${isOpen ? 'bg-blue-100 bg-opacity-70' : ''
-                            } `}>
+        <nav className='fixed w-full z-20 top-0 bg-blue-100 bg-opacity-80 '>
+            
+            <div className='max-w-screen-xl flex flex-row mx-auto p-2'>
 
-                            <Link spy={true} to='Home' activeClass='activeClass'>
-                                <li>
-                                    <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Home</div>
-                                </li>
-                            </Link>
+                <img src={Kocsog} className='h-8 ml-4' alt='LOGO' />
 
-                            <Link spy={true} to='Overview'>
-                                <li>
-                                    <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Über mich</div>
-                                </li>
-                            </Link>
+                <div className=' flex md:order-2'>
 
-                            <Link spy={true} to='Projects'>
-                                <li>
-                                    <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Projekten</div>
-                                </li>
-                            </Link>
+                    <button onClick={toggle} className='inline-flex items-cener p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:ring-2 focus:ring-gray-200'  >
+                        <AiOutlineMenuUnfold className='text-blue-400 text-lg'>
 
-                            <Link spy={true} to='Contact' activeClass='activeClass'>
-                                <li>
-                                    <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Kontakt</div>
-                                </li>
-                            </Link>
-
-                            {token != null
-
-                                ? <ALink to='Kommentar'>
-                                    <li>
-                                        <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Kommentar</div>
-                                    </li>
-                                </ALink>
-
-                                : null
-                            }
-
-                            {token == null
-                            
-                                ? <BLink spy={true} to='Login' activeClass='activeClass'>
-                                    <li>
-                                        <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700  '>Login</div>
-                                    </li>
-                                </BLink>
-
-                                : null
-                            }
-
-                        </ul>
-                    </div>
+                        </AiOutlineMenuUnfold>
+                    </button>
 
                 </div>
 
-            </nav>
+                <div className={`items-center ms-6 justify-between w-full md:flex md:w-auto md:order-1 ${isOpen ? 'block' : 'hidden'
+                    } `}>
+                    <ul className={`flex flex-col p-4 md:p-0 mt-4 text-xl border cursor-pointer border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ${isOpen ? 'bg-blue-100 bg-opacity-70' : ''
+                        } `}>
 
-        </div>
-    )
+                        <Link spy={true} to='Home' activeClass='activeClass'>
+                            <li>
+                                <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700'>Home</div>
+                            </li>
+                        </Link>
+
+                        <Link spy={true} to='Overview'>
+                            <li>
+                                <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700'>Über mich</div>
+                            </li>
+                        </Link>
+
+                        <Link spy={true} to='Projects'>
+                            <li>
+                                <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700'>Projekten</div>
+                            </li>
+                        </Link>
+
+                        <Link spy={true} to='Contact' activeClass='activeClass'>
+                            <li>
+                                <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700'>Kontakt</div>
+                            </li>
+                        </Link>
+
+                        {token != null
+
+                            ? <ALink to='Kommentar'>
+                                <li>
+                                    <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700'>Kommentar</div>
+                                </li>
+                            </ALink>
+
+                            : null
+                        }
+
+                        {token == null
+
+                            ? <BLink spy={true} to='Login' activeClass='activeClass'>
+                                <li>
+                                    <div className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700'>Login</div>
+                                </li>
+                            </BLink>
+
+                            : null
+                        }
+
+                        {token != null
+
+                            ? <li to='Abmelden' className='block py-2 pl-2 pr-4 rounded md:p-0 hover:text-orange-600 text-blue-700'>
+
+                                <button onClick={abmelden}>Abmelden</button>
+                            </li>
+
+                            : null
+                        }
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </nav>
+
+    </div>
+
 }
 
 export default Navbar

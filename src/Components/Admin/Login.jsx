@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Form.css';
 import Contact from '../Contact';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -9,20 +10,22 @@ function Login() {
     const [password, setPassword] = useState("");
 
     const [speichern, setSpeichern] = useState({});
-    
+
+    const navigate = useNavigate();
+
 
     //Bejelentkezes
     function anmelden() {
-        
+
         const options = {
 
             headers: {
 
-                "X-Parse-Application-Id": "tQRGq1dDgAmbR8jVTCEkhL3m3nOP39bSNqLSGi0i",
+                "X-Parse-Application-Id" : process.env.REACT_APP_ID,
 
-                "X-Parse-REST-API-Key": "aftZIP1uMDxJeNF6iqi0j4oMHb5UZxaKCguukcxl",
+                "X-Parse-REST-API-Key" : process.env.REACT_APP_API_KEY,
 
-                "Content-Type": "application/json",
+                "Content-Type" : "application/json",
 
                 "X-Parse-Revocable-Session" : 1,
             },
@@ -38,25 +41,54 @@ function Login() {
                 localStorage.setItem("jwt", daten.sessionToken)
                 localStorage.setItem("user", daten.username)
                 localStorage.setItem("id", daten.objectId)
+                navigate("/")
             })
+
     }
 
-    return <div>        
+    return <div>
 
-        <h1>Login</h1>
-        <br/>
+        <div className='flex justify-centerf flex-col'>
 
-        Benutzer: <input onChange={(e) => setBenutzer(e.target.value)} value={benutzer}></input>
-        <br/>
-        <br/>
-        Kennwort: <input type='password' onChange={(e) => setPassword(e.target.value)} value={password}></input>       
-        <br/>
-        <br/>
-        <button onClick={anmelden}>login</button> 
-        <br/>
-        <br/>
-        <button onClick={() => {}}>Zurück</button> 
+            <div className='flex justify-center flex-row'> 
 
-    </div>
+                <table className='border 2px mt-10'>
+                    <thead className='bg-blue-100'>
+                        <tr>
+                            <th>
+                                <h1 className='m-2'>Login</h1>
+                            </th>
+                        </tr>                        
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th>
+                                <br />
+                                Benutzer: <input className='border 2px rounded-xl bg-gray-200' onChange={(e) => setBenutzer(e.target.value)} value={benutzer}></input>
+                                <br />
+                                <br />
+                                Kennwort: <input className='border 2px rounded-xl bg-gray-200' type='password' onChange={(e) => setPassword(e.target.value)} value={password}></input>
+                                <br />
+                                <br />
+                            </th>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div className='Butten flex justify-center flex-row'>
+
+                <button className='m-8 p-2 border color-black rounded-xl bg-gray-200 shadow-xl/30' onClick={anmelden}>Login</button>
+                
+                <button className='m-8 p-2 border color-black rounded-xl bg-gray-200' onClick={() => navigate("/")}>Zurück</button>                
+
+            </div>
+
+        </div>
+
+    </div >
 }
 export default Login;

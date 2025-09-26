@@ -87,7 +87,7 @@ const projects = [
     // Übungen
 
     {
-        name: "einen Überblick",      
+        name: "Urlaubs - Projekt",      
         description:
             "Ich mache das, um zu üben!",
         tags: [
@@ -107,10 +107,9 @@ const projects = [
         image: working,
         source_code_lik: "https://github.com/ignac1987/Urlaub.git",
     },
-
-    /* 
+    
     {
-        name: "Übungen_1",        
+        name: "To Do - Projekt",        
         description:
             "Ich mache das, um zu üben!",
         tags: [
@@ -129,6 +128,6 @@ const projects = [
         ],
         image: working,
         source_code_lik: "https://github.com/ignac1987/Urlaub.git",
-    },*/
+    },
 ];
 export {services, technologies, projects};
